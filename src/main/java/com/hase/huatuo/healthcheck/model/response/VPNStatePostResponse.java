@@ -1,6 +1,6 @@
 package com.hase.huatuo.healthcheck.model.response;
 
-public class HealthPostResponse {
+public class VPNStatePostResponse {
 	private String errorCode;
 
 	public String getErrorCode() {
@@ -10,5 +10,4 @@ public class HealthPostResponse {
 	public void setErrorCode(String errorCode) {
 		this.errorCode = errorCode;
 	}
-	
 }
