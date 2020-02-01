@@ -1,13 +1,14 @@
 package com.hase.huatuo.healthcheck.service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionBuilder;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.jpa.HibernateEntityManager;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate5.SessionFactoryUtils;
 import org.springframework.stereotype.Service;
 
 import com.hase.huatuo.healthcheck.dao.PersonHealthInfoRepository;
@@ -23,12 +24,15 @@ public class HuatuoHealthService {
 
 	@Autowired
 	private PersonHealthInfoRepository recordsRepository;
-
+	
+	@PersistenceContext
+    private EntityManager entityManager;
+	
 	public HealthPostResponse setPersonHealth(HealthPostBody healthPostBody) {
 		HealthPostResponse response = new HealthPostResponse();
 		try {
-			deleteHealthInfo(healthPostBody);
-//			deleteHealthInfoHql(healthPostBody);
+//			deleteHealthInfo(healthPostBody);
+			deleteHealthInfoHql(healthPostBody);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -39,29 +43,32 @@ public class HuatuoHealthService {
 
 	public void deleteHealthInfoHql(HealthPostBody healthPostBody) {
 		Transaction tx = null;
-//		try {
-//			SessionBuilder sb = SessionFactoryUtils.
-//			Session session = sb.connection(connection).openSession();
-//			Session session = SessionFactoryUtils.openSession();
-//			tx = session.getTransaction();
-//			session.beginTransaction();
-//			Query query = session.createQuery("delete Student s where s.id=?");
-//			query.setString(0, healthPostBody.getPersonHealthInfo().getId().getStaffID());
-//			query.executeUpdate();
-//			tx.commit();
-//		} catch (HibernateException e) {
-//			tx.rollback();
-//			e.printStackTrace();
-//		} finally {
-//			session.close();
-//		}
+		Session session = null;
+//		SessionFactory sessionFactory = null;
+		
+		
+		HibernateEntityManager hEntityManager = (HibernateEntityManager)entityManager;
+        session = hEntityManager.getSession();
+
+
+		try {
+			tx = session.getTransaction();
+			session.beginTransaction();
+			Query query = session.createQuery("delete HealthInfo s where s.id.staffID=?0");
+			query.setParameter(0, healthPostBody.getPersonHealthInfo().getId().getStaffID());
+//			query.
+			query.executeUpdate();
+			tx.commit();
+		} catch (HibernateException e) {
+			tx.rollback();
+			e.printStackTrace();
+		}
 	}
 
 	public void deleteHealthInfo(HealthPostBody healthPostBody) {
 		HealthInfo pi = new HealthInfo();
 		pi.setId(new healthPK());
 		pi.getId().setStaffID(healthPostBody.getPersonHealthInfo().getId().getStaffID());
-		pi.getId().setWorkplace("%%");
 		recordsRepository.delete(pi);
 	}
 
@@ -77,6 +84,7 @@ public class HuatuoHealthService {
 		pi.setOpenId(healthPostBody.getPersonHealthInfo().getOpenId());
 		pi.setReporter(healthPostBody.getPersonHealthInfo().getReporter());
 		pi.getId().setStaffID(healthPostBody.getPersonHealthInfo().getId().getStaffID());
+		pi.setOther(healthPostBody.getPersonHealthInfo().getOther());
 //		pi.setWorkplace(workplace);
 		for (int i = 0; i < list.length; i++) {
 			pi.getId().setWorkplace(list[i]);

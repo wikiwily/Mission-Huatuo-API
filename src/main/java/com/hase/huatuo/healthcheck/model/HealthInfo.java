@@ -8,6 +8,7 @@ import javax.persistence.Id;
 
 @Entity()
 public class HealthInfo implements Serializable {
+	
 	@Column(name="open_Id")
 	private String openId;
 	@Id
@@ -22,6 +23,14 @@ public class HealthInfo implements Serializable {
 	private String healthStatus;
 	@Column(name="reporter")
 	private String reporter;
+	@Column(name="other")
+	private String other;
+	public String getOther() {
+		return other;
+	}
+	public void setOther(String other) {
+		this.other = other;
+	}
 	public String getOpenId() {
 		return openId;
 	}
