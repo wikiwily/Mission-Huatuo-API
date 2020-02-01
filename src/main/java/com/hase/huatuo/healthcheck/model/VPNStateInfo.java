@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity(name = "vpn_info")
-@Data
 public class VPNStateInfo {
     @Column(name = "openId")
     private String openId;
@@ -49,4 +48,11 @@ public class VPNStateInfo {
     @Column(name = "reporter_staff_id")
     private String reporterStaffId;
 
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
 }
