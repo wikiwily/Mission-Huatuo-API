@@ -2,8 +2,6 @@ package com.hase.huatuo.healthcheck.model.response;
 
 import java.util.List;
 
-import com.hase.huatuo.healthcheck.model.PersonHealthInfo;
-
 public class HealthRequestResponse {
 	private List<PersonHealthInfo> personHealthInfos;
 
