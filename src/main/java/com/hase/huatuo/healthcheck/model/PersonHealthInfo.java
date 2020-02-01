@@ -1,10 +1,19 @@
 package com.hase.huatuo.healthcheck.model;
 
+import javax.persistence.*;
+
+@Entity()
 public class PersonHealthInfo {
+	@Id
+	@Column
 	private String staffID;
+	@Column
 	private String staffName;
-	private String healthState; 
+	@Column
+	private String healthState;
+	@Column
 	private String local;
+	@Column
 	private String building;
 	
 	public String getStaffID() {
