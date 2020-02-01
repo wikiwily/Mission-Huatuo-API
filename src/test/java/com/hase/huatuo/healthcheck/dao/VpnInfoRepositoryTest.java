@@ -29,4 +29,12 @@ public class VpnInfoRepositoryTest {
         Optional<VPNStateInfo> vpn  = vpnInfoRepository.findById("001");
         Assert.assertEquals("001",vpn.get().getStaffId());
     }
+    @Test
+    public void testSaveAndFlush() {
+     //update data
+        VPNStateInfo vpnStateInfo = new VPNStateInfo();
+        vpnStateInfo.setStaffId("001");
+        vpnStateInfo.setVpnState("test");
+        vpnInfoRepository.saveAndFlush(vpnStateInfo);
+    }
 }
