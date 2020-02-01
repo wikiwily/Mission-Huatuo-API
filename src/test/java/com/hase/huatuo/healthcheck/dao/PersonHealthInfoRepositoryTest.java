@@ -14,19 +14,19 @@ import java.util.Optional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class)
-public class RecordsRepositoryTest {
+public class PersonHealthInfoRepositoryTest {
     @Autowired
-    private RecordsRepository recordsRepository;
+    private PersonHealthInfoRepository personHealthInfoRepository;
 
     @Test
     public void testAdd() {
         PersonHealthInfo personHealthInfo = new PersonHealthInfo();
         personHealthInfo.setStaffID("002");
-        recordsRepository.save(personHealthInfo);
+        personHealthInfoRepository.save(personHealthInfo);
     }
     @Test
     public void testQuery() {
-        Optional<PersonHealthInfo> per  = recordsRepository.findById("001");
+        Optional<PersonHealthInfo> per  = personHealthInfoRepository.findById("001");
         String staffId = per.get().getStaffID();
         Assert.assertEquals("001",staffId);
     }

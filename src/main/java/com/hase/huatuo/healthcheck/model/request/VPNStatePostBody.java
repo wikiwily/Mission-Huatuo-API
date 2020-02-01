@@ -1,17 +1,16 @@
 package com.hase.huatuo.healthcheck.model.request;
 
 import com.hase.huatuo.healthcheck.model.VPNStateInfo;
+import lombok.Data;
 
 public class VPNStatePostBody {
-	private VPNStateInfo vpnState;
+	private VPNStateInfo vpnStateInfo;
 
-	public VPNStateInfo getVpnState() {
-		return vpnState;
+	public VPNStateInfo getVpnStateInfo() {
+		return vpnStateInfo;
 	}
 
-	public void setVpnState(VPNStateInfo vpnState) {
-		this.vpnState = vpnState;
+	public void setVpnStateInfo(VPNStateInfo vpnStateInfo) {
+		this.vpnStateInfo = vpnStateInfo;
 	}
-	
-	
 }

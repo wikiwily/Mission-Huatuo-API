@@ -1,11 +1,9 @@
 package com.hase.huatuo.healthcheck.rest;
 
 import com.hase.huatuo.healthcheck.model.request.HealthPostBody;
-import com.hase.huatuo.healthcheck.model.request.HealthRequest;
 import com.hase.huatuo.healthcheck.model.request.VPNStatePostBody;
 import com.hase.huatuo.healthcheck.model.response.HealthPostResponse;
 import com.hase.huatuo.healthcheck.model.response.VPNStatePostResponse;
-import com.hase.huatuo.healthcheck.model.response.VPNStateRequestResponse;
 import com.hase.huatuo.healthcheck.service.HuatuoHealthService;
 import com.hase.huatuo.healthcheck.service.HuatuoVPNService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +27,8 @@ public class HuatuoResource {
 
     @Autowired
     private HealthReportService healthReportService;
-
-    
     @PostMapping("/health")
     public HealthPostResponse updateHealth(@RequestBody final HealthPostBody healthPostBody) {
-    	
     	return huatuoHealthService.setPersonHealth(healthPostBody);
     }
 
@@ -44,14 +39,7 @@ public class HuatuoResource {
     }
     
     @PostMapping("/vpnstate")
-    public VPNStatePostResponse updateVPNState(@RequestBody final VPNStatePostBody vpnStatePostBody) {
-    	
+    public VPNStatePostResponse submitVPNState(@RequestBody final VPNStatePostBody vpnStatePostBody) {
     	return huatuoVPNService.setVPNState(vpnStatePostBody);
     }
-    
-    @GetMapping("/vpnstate")
-    public VPNStateRequestResponse requestVPNState(final HealthRequest healthRequest) {
-    	return huatuoVPNService.getVPNState(healthRequest);
-    }
-    
 }
