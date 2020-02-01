@@ -2,6 +2,7 @@ package com.hase.huatuo.healthcheck.dao;
 
 import com.hase.huatuo.healthcheck.Application;
 import com.hase.huatuo.healthcheck.model.PersonHealthInfo;
+import com.hase.huatuo.healthcheck.model.VPNStateInfo;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,23 +12,21 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Optional;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class)
-public class RecordsRepositoryTest {
+public class VpnInfoRepositoryTest {
     @Autowired
-    private RecordsRepository recordsRepository;
+    private VPNInfoRepository vpnInfoRepository;
 
     @Test
     public void testAdd() {
-        PersonHealthInfo personHealthInfo = new PersonHealthInfo();
-        personHealthInfo.setStaffID("002");
-        recordsRepository.save(personHealthInfo);
+        VPNStateInfo vpnStateInfo = new VPNStateInfo();
+        vpnStateInfo.setStaffId("001");
+        vpnInfoRepository.save(vpnStateInfo);
     }
     @Test
     public void testQuery() {
-        Optional<PersonHealthInfo> per  = recordsRepository.findById("001");
-        String staffId = per.get().getStaffID();
-        Assert.assertEquals("001",staffId);
+        Optional<VPNStateInfo> vpn  = vpnInfoRepository.findById("001");
+        Assert.assertEquals("001",vpn.get().getStaffId());
     }
 }
