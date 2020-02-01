@@ -1,15 +1,15 @@
 package com.hase.huatuo.healthcheck.model.request;
 
-import com.hase.huatuo.healthcheck.model.PersonHealthInfo;
+import com.hase.huatuo.healthcheck.model.HealthInfo;
 
 public class HealthPostBody {
-	private PersonHealthInfo personHealthInfo;
+	private HealthInfo personHealthInfo;
 
-	public PersonHealthInfo getPersonHealthInfo() {
+	public HealthInfo getPersonHealthInfo() {
 		return personHealthInfo;
 	}
 
-	public void setPersonHealthInfo(PersonHealthInfo personHealthInfo) {
+	public void setPersonHealthInfo(HealthInfo personHealthInfo) {
 		this.personHealthInfo = personHealthInfo;
 	}
 	

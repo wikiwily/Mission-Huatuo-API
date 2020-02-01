@@ -1,7 +1,7 @@
 package com.hase.huatuo.healthcheck.dao;
 
 import com.hase.huatuo.healthcheck.Application;
-import com.hase.huatuo.healthcheck.model.PersonHealthInfo;
+import com.hase.huatuo.healthcheck.model.HealthInfo;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,13 +20,13 @@ public class PersonHealthInfoRepositoryTest {
 
     @Test
     public void testAdd() {
-        PersonHealthInfo personHealthInfo = new PersonHealthInfo();
+        HealthInfo personHealthInfo = new HealthInfo();
         personHealthInfo.setStaffID("002");
         personHealthInfoRepository.save(personHealthInfo);
     }
     @Test
     public void testQuery() {
-        Optional<PersonHealthInfo> per  = personHealthInfoRepository.findById("001");
+        Optional<HealthInfo> per  = personHealthInfoRepository.findById("001");
         String staffId = per.get().getStaffID();
         Assert.assertEquals("001",staffId);
     }
