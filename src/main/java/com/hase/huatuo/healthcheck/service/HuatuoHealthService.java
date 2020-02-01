@@ -55,7 +55,7 @@ public class HuatuoHealthService {
 			tx = session.getTransaction();
 			session.beginTransaction();
 			Query query = session.createQuery("delete HealthInfo s where s.id.staffID=?0");
-			query.setParameter(0, healthPostBody.getPersonHealthInfo().getId().getStaffID());
+			query.setParameter(0, healthPostBody.getStaffId());
 //			query.
 			query.executeUpdate();
 			tx.commit();
@@ -68,23 +68,23 @@ public class HuatuoHealthService {
 	public void deleteHealthInfo(HealthPostBody healthPostBody) {
 		HealthInfo pi = new HealthInfo();
 		pi.setId(new healthPK());
-		pi.getId().setStaffID(healthPostBody.getPersonHealthInfo().getId().getStaffID());
+		pi.getId().setStaffID(healthPostBody.getStaffId());
 		recordsRepository.delete(pi);
 	}
 
 	public void addHealthInfo(HealthPostBody healthPostBody) {
-		String workplace = healthPostBody.getPersonHealthInfo().getId().getWorkplace();
+		String workplace = healthPostBody.getWorkplace();
 		String[] list = workplace.split(",");
 		HealthInfo pi = new HealthInfo();
 		pi.setId(new healthPK());
-		pi.setCity(healthPostBody.getPersonHealthInfo().getCity());
-		pi.setDepartment(healthPostBody.getPersonHealthInfo().getDepartment());
-		pi.setHealthStatus(healthPostBody.getPersonHealthInfo().getHealthStatus());
-		pi.setMobileNum(healthPostBody.getPersonHealthInfo().getMobileNum());
-		pi.setOpenId(healthPostBody.getPersonHealthInfo().getOpenId());
-		pi.setReporter(healthPostBody.getPersonHealthInfo().getReporter());
-		pi.getId().setStaffID(healthPostBody.getPersonHealthInfo().getId().getStaffID());
-		pi.setOther(healthPostBody.getPersonHealthInfo().getOther());
+		pi.setCity(healthPostBody.getCity());
+		pi.setDepartment(healthPostBody.getDepartment());
+		pi.setHealthStatus(healthPostBody.getHealthStatus());
+		pi.setMobileNum(healthPostBody.getMobileNum());
+		pi.setOpenId(healthPostBody.getOpenId());
+		pi.setReporter(healthPostBody.getReporter());
+		pi.getId().setStaffID(healthPostBody.getStaffId());
+		pi.setOther(healthPostBody.getOther());
 //		pi.setWorkplace(workplace);
 		for (int i = 0; i < list.length; i++) {
 			pi.getId().setWorkplace(list[i]);
