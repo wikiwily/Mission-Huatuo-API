@@ -9,7 +9,7 @@ import javax.persistence.Id;
 @Entity(name = "vpn_info")
 @Data
 public class VPNStateInfo {
-    @Column(name = "openId")
+    @Column(name = "open_id")
     private String openId;
     @Id
     @Column(name = "staff_id", nullable = false)
