@@ -1,6 +1,6 @@
 package com.hase.huatuo.healthcheck.model;
 
-public class HealthInfo {
+public class HealthInfoView {
     public String getCity() {
         return city;
     }

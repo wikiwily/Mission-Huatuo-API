@@ -1,6 +1,6 @@
 package com.hase.huatuo.healthcheck.service;
 
-import com.hase.huatuo.healthcheck.model.HealthInfo;
+import com.hase.huatuo.healthcheck.model.HealthInfoView;
 import com.hase.huatuo.healthcheck.model.response.AreaReport;
 import com.hase.huatuo.healthcheck.model.response.BuildingReport;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +10,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class HealthReportService {
@@ -51,11 +48,11 @@ public class HealthReportService {
             areaReportResponses.add(areaReportResponseXA);
 
         } else {
-            RowMapper<HealthInfo> healthInfoRowMapper = BeanPropertyRowMapper.newInstance(HealthInfo.class);
-            List<HealthInfo> healthInfos = jdbcTemplate.query(HEALTH_STATISTIC_SQL, healthInfoRowMapper, null);
-            Iterator<Map.Entry<String, List<HealthInfo>>> entryIterator = healthInfos.stream().collect(Collectors.groupingBy(h -> h.getCity())).entrySet().iterator();
+            RowMapper<HealthInfoView> healthInfoRowMapper = BeanPropertyRowMapper.newInstance(HealthInfoView.class);
+            List<HealthInfoView> healthInfos = jdbcTemplate.query(HEALTH_STATISTIC_SQL, healthInfoRowMapper, null);
+            Iterator<Map.Entry<String, List<HealthInfoView>>> entryIterator = healthInfos.stream().collect(Collectors.groupingBy(h -> h.getCity())).entrySet().iterator();
             while (entryIterator.hasNext()){
-                Map.Entry<String, List<HealthInfo>> entry = entryIterator.next();
+                Map.Entry<String, List<HealthInfoView>> entry = entryIterator.next();
                 AreaReport areaReport = new AreaReport();
                 areaReport.setArea(entry.getKey());
                 areaReport.setBuildingReports(transformHealthListToBuildingList(entry.getValue()));
@@ -65,9 +62,9 @@ public class HealthReportService {
         return ResponseEntity.ok(areaReportResponses);
     }
 
-    public List<BuildingReport> transformHealthListToBuildingList(final List<HealthInfo> healthInfos){
+    public List<BuildingReport> transformHealthListToBuildingList(final List<HealthInfoView> healthInfos){
         List<BuildingReport> buildingReports = new ArrayList<>();
-        Iterator<Map.Entry<String, List<HealthInfo>>> entryIterator = healthInfos.stream().collect(Collectors.groupingBy(h -> h.getCity()+"_" + h.getWorkplace())).entrySet().iterator();
+        Iterator<Map.Entry<String, List<HealthInfoView>>> entryIterator = healthInfos.stream().collect(Collectors.groupingBy(h -> h.getCity()+"_" + h.getWorkplace())).entrySet().iterator();
         while (entryIterator.hasNext()){
             BuildingReport br = new BuildingReport();
             br.setConfirmed("0");
