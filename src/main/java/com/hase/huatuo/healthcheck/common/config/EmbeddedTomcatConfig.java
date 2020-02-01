@@ -29,7 +29,7 @@ public class EmbeddedTomcatConfig implements WebServerFactoryCustomizer<Configur
                 protocol.setSelectorTimeout(3000);
                 protocol.setSessionTimeout(3000);
                 protocol.setConnectionTimeout(3000);
-                protocol.setPort(443);
+                protocol.setPort(80);
             }
         });
     }
