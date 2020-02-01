@@ -34,7 +34,6 @@ public class VpnInfoRepositoryTest {
      //update data
         VPNStateInfo vpnStateInfo = new VPNStateInfo();
         vpnStateInfo.setStaffId("001");
-        vpnStateInfo.setVpnState("test");
         vpnInfoRepository.saveAndFlush(vpnStateInfo);
     }
 }
