@@ -21,13 +21,6 @@ public class PersonHealthInfoRepositoryTest {
     @Test
     public void testAdd() {
         HealthInfo personHealthInfo = new HealthInfo();
-        personHealthInfo.setStaffID("002");
         personHealthInfoRepository.save(personHealthInfo);
-    }
-    @Test
-    public void testQuery() {
-        Optional<HealthInfo> per  = personHealthInfoRepository.findById("001");
-        String staffId = per.get().getStaffID();
-        Assert.assertEquals("001",staffId);
     }
 }

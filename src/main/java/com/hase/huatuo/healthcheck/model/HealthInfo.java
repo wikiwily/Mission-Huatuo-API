@@ -1,25 +1,23 @@
 package com.hase.huatuo.healthcheck.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity()
-public class HealthInfo {
+public class HealthInfo implements Serializable {
 	@Column(name="open_Id")
 	private String openId;
 	@Id
-	@Column(name="staff_Id")
-	private String staffID;
+	private healthPK id;
 	@Column(name="mobile_Num")
 	private String mobileNum;
 	@Column(name="department")
 	private String department;
 	@Column(name="city")
 	private String city;
-	@Id
-	@Column(name="workplace")
-	private String workplace;
 	@Column(name="health_Status")
 	private String healthStatus;
 	@Column(name="reporter")
@@ -30,14 +28,14 @@ public class HealthInfo {
 	public void setOpenId(String openId) {
 		this.openId = openId;
 	}
-	public String getStaffID() {
-		return staffID;
-	}
-	public void setStaffID(String staffID) {
-		this.staffID = staffID;
-	}
 	public String getMobileNum() {
 		return mobileNum;
+	}
+	public healthPK getId() {
+		return id;
+	}
+	public void setId(healthPK id) {
+		this.id = id;
 	}
 	public void setMobileNum(String mobileNum) {
 		this.mobileNum = mobileNum;
@@ -53,12 +51,6 @@ public class HealthInfo {
 	}
 	public void setCity(String city) {
 		this.city = city;
-	}
-	public String getWorkplace() {
-		return workplace;
-	}
-	public void setWorkplace(String workplace) {
-		this.workplace = workplace;
 	}
 	public String getHealthStatus() {
 		return healthStatus;
